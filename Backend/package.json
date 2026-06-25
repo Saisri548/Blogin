@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.19.3",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -9,7 +9,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.1",
     "pg": "^8.22.0",
-    "prisma": "^5.22.0"
+    "prisma": "^6.19.3"
   },
   "name": "backend",
   "version": "1.0.0",
@@ -18,6 +18,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
