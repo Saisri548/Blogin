@@ -7,9 +7,21 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ email, password });
+  const res=await fetch("https://blogin-4bl6.onrender.com/api/auth/Login", {
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body:JSON.stringify({
+      email,
+      password
+    })
+  })
+  const data=await res.json()
+  console.log(data)
 
     // optional navigation
     // navigate("/dashboard");

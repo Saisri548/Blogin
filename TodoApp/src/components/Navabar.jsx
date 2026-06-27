@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { useNavigate } from "react-router-dom";
 const Navabar = () => {
+    const navigate=useNavigate()
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm">
        <img src="./blogin.png" width={100} height={100}/>
@@ -9,7 +10,7 @@ const Navabar = () => {
      <a className="hover:text-blue-500">About</a>
      <a className="hover:text-blue-500">Blogs</a>
      <a className="hover:text-blue-500">Contact</a>
-     <button className='px-4 py-2 rounded-xl bg-blue-500 text-white'>Login</button>
+     <button className='px-4 py-2 rounded-xl bg-blue-500 text-white' onClick={()=>navigate("/Login")}>Login</button>
     </div>
     </nav>
   )
