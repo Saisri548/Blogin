@@ -1,7 +1,7 @@
 import {PrismaClient} from "@prisma/client"
 const prisma=new PrismaClient()
 async function main(){
-  await prisma.genre.createMany({data:
+  await prisma.Genre.createMany({data:
 [
   { name: "Technology" },
       { name: "Web Development" },
@@ -35,3 +35,5 @@ main().catch((e)=>{
 }).finally(async()=>{
   await prisma.$disconnect()
 })
+
+

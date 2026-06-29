@@ -1,6 +1,10 @@
 generator client {
   provider = "prisma-client-js"
 }
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
 
 datasource db {
   provider = "postgresql"
@@ -23,6 +27,8 @@ model Blog {
   title     String
   subtitle  String
   content   String
+  coverImage String
+   status    BlogStatus  @default(DRAFT)
   authorId  String
   genreId   String
   createdAt DateTime  @default(now())

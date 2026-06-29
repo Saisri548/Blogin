@@ -24,7 +24,7 @@ export const createBlog = async (req, res) => {
       });
     }
 
-    const { title, subtitle, content, Status, genreId } = req.body;
+    const { title, subtitle, content,  status,genreId } = req.body;
 
     let coverImage = "";
 
@@ -40,8 +40,8 @@ export const createBlog = async (req, res) => {
         title,
         subtitle,
         content,
-        Status,
-        coverImage,
+        
+     
         genreId,
         authorId,
       },
