@@ -1,10 +1,21 @@
 import { prisma } from "../../prisma/client.js"
+
+import uploadToCloudinary from "../../utilis/uploadToCloudinary.js";
 export const createBlog=async(req,res)=>{
     try{
          console.log("USER:", req.user);
 
-        const {title,subtitle,content,ImageUrl,genreId}=req.body
+        const {title,subtitle,content,Status,genreId}=req.body
+        let coverImage=""      
+        if(req.file){
+            const result=await uploadToCloudinary(req.file.buffer)
+            coverImage=result.secure_url
+        }
         const authorId = req.user.userId; 
+        console.log("BODY:", req.body);
+console.log("USER:", req.user);
+console.log("FILE:", req.file);
+console.log("AUTHOR ID:", authorId);
         const blog=await prisma.Blog.create({
             data:{
 
@@ -12,8 +23,9 @@ export const createBlog=async(req,res)=>{
                 subtitle,
                 content,
                 authorId,
-                 ImageUrl,
-               
+                Status,
+                coverImage,
+            
                 genreId
             }
         })
@@ -23,13 +35,17 @@ export const createBlog=async(req,res)=>{
         })
 
     }
-    catch(error){
-        return res.status(500).json({
-            success:false,
-            message:error.message
-        })
-    }
+    catch (error) {
+    console.error("FULL ERROR:");
+    console.error(error);
+
+    return res.status(500).json({
+        success: false,
+        message: error.message
+    });
 }
+    }
+
 export const getAllBlogs=async(req,res)=>{
     try{
         const blogs=await prisma.Blog.findMany({
@@ -115,7 +131,7 @@ export const deletedBlog=async(req,res)=>{
             return res.status(404).json({ message: "Blog not found" });
     }
     if(blog.authorId!==req.user.userId){
-        return res.status(404).json({ message: "Blog not found due to lack of userId" });
+        return res.status(403).json({ message: "Blog not found due to lack of userId" });
     }
     await prisma.Blog.delete({
         where:{id}
